@@ -8,44 +8,39 @@ public class water : MonoBehaviour
     private GameObject agua;
     private Vector3 scale;
     public float high = 3.6f;
-    private bool touch;
-
+    public static water instance;
+    private bool block;
 
     // Start is called before the first frame update
     void Start()
     {
-        touch = false;
+        block = false;
+        instance = this;
     }
 
     // Update is called once per frame
     void Update()
     {
         //Debug.Log(transform.localScale.y + high);
+
     }
 
-
-    void OnParticleCollision(GameObject other)
+    private void acionTrigger()
     {
-        touch = true;
-        Invoke("teste", 0);
+        transform.localScale = new Vector3(7.11f, transform.localScale.y + high, 1);
+        Debug.Log("Colidiu");
     }
 
-    private void teste()
+    public void OnParticleCollision(GameObject other)
     {
-        if (touch == true)
+        if (block == false)
         {
-            transform.localScale = new Vector3(7.11f, transform.localScale.y + high, 1);
-            touch = false;
+            acionTrigger();
+        
         }
-        Debug.Log("Teste");
+
+
     }
-
-
-
-
-
-
-
 
 
 }

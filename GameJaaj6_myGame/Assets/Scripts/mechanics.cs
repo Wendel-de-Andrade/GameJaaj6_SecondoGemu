@@ -6,41 +6,35 @@ using UnityEngine;
 public class mechanics : MonoBehaviour
 {
     [SerializeField] ParticleSystem rain = null;
+    public ParticleSystem trigger = null;
     public bool acionado = false;
     private bool hover;
-    private ParticleSystem particles;
-    public int qntParticles;
     public static mechanics instance;
 
     //Verifica se a Nuvem já foi clicado e ativa ela
 
     void Start()
     {
-        particles = GetComponent<ParticleSystem>();
         instance = this;
         hover = false;
     }
     void Update()
     {
-
         if (Input.GetMouseButtonDown(0) && acionado == false && hover == true)
         {
-            {
-                Debug.Log("CLICKED " + particles);
-                Raining();
-                acionado = true;
-            }
+            Raining();
+            acionado = true;
         }
-
     }
 
     //Metódo para chamar a chuva
     public void Raining()
     {
         rain.Play();
+        trigger.Play();
     }
 
-    //Verifica se o ponteiro do mouse entro no Collider do Objeto
+    //Verifica se o ponteiro do mouse entrou no Collider do Objeto
     void OnMouseEnter()
     {
         hover = true;
@@ -49,4 +43,11 @@ public class mechanics : MonoBehaviour
     {
         hover = false;
     }
+
+
+
+
+
 }
+
+
