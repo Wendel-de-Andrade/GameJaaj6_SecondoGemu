@@ -144,4 +144,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dbb819fd6da5c054493bb0038ef768c9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  high: 2.25
+  high: 0.5
+  duracao: 1.5
+  tempoCorrido: 20

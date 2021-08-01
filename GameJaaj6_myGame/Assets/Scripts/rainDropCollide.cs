@@ -13,7 +13,6 @@ public class rainDropCollide : MonoBehaviour
     }
     void OnParticleCollision(GameObject other)
     {
-        Debug.Log("FOI");
         Destroy(ps,0);
     }
 
