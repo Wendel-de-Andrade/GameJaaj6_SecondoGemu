@@ -144,8 +144,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dbb819fd6da5c054493bb0038ef768c9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  high: 1.2
-  winter: 0
-  LerpTime: 0.15
-  myColor: {r: 0, g: 0.6156863, b: 1, a: 1}
-  freeze: 0
+  high: 2.3
+  winter: 1
+  LerpTime: 0.05
+  myColor: {r: 0, g: 0.2465775, b: 1, a: 0.4627451}
+  freeze: 1

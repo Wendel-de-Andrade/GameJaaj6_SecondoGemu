@@ -20,6 +20,7 @@ public class seasonManager : MonoBehaviour
     void Update()
     {
         winter();
+        summer();
     }
 
     public void winter()
@@ -34,6 +35,19 @@ public class seasonManager : MonoBehaviour
         {
             neve.Stop();
             agua.winter = false;
+        }
+    }
+
+    public void summer()
+    {
+        if (currentSeason == Season.SUMMER)
+        {
+            agua.summer = true;
+        }
+
+         if (currentSeason != Season.SUMMER)
+        {
+            agua.summer = false;
         }
     }
 }

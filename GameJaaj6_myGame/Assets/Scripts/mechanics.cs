@@ -7,9 +7,11 @@ public class mechanics : MonoBehaviour
 {
     [SerializeField] ParticleSystem rain = null;
     public ParticleSystem trigger = null;
+    public GameObject triggerObj;
     public bool acionado = false;
     private bool hover;
     public static mechanics instance;
+    private water agua;
 
     //Verifica se a Nuvem já foi clicado e ativa ela
 
@@ -17,13 +19,20 @@ public class mechanics : MonoBehaviour
     {
         instance = this;
         hover = false;
+        GameObject a = GameObject.FindGameObjectWithTag("Agua");
+        agua = a.GetComponent<water>();
     }
     void Update()
     {
-        if (Input.GetMouseButtonDown(0) && acionado == false && hover == true)
+        if (Input.GetMouseButtonDown(0) && acionado == false && hover == true && agua.winter == false)
         {
             Raining();
             acionado = true;
+        }
+        if (agua.summer == true)
+        {
+            triggerObj.SetActive(true);
+            acionado = false;
         }
     }
 
@@ -43,11 +52,6 @@ public class mechanics : MonoBehaviour
     {
         hover = false;
     }
-
-
-
-
-
 }
 
 
