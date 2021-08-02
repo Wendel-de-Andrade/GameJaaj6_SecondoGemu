@@ -19,16 +19,21 @@ public class seasonManager : MonoBehaviour
     }
     void Update()
     {
+        winter();
+    }
+
+    public void winter()
+    {
         if (currentSeason == Season.WINTER)
         {
             neve.Play();
             agua.winter = true;
         }
-        else
+
+        if (currentSeason != Season.WINTER)
         {
             neve.Stop();
             agua.winter = false;
         }
-
     }
 }
