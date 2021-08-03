@@ -8448,6 +8448,22 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 354498388, guid: d848e734372d9014d80378a9de8a8942, type: 3}
+      propertyPath: lerpTime
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 354498388, guid: d848e734372d9014d80378a9de8a8942, type: 3}
+      propertyPath: curve.m_Curve.Array.size
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 354498388, guid: d848e734372d9014d80378a9de8a8942, type: 3}
+      propertyPath: curve.m_Curve.Array.data[1].time
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 354498388, guid: d848e734372d9014d80378a9de8a8942, type: 3}
+      propertyPath: curve.m_Curve.Array.data[1].value
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 8342552475719736666, guid: d848e734372d9014d80378a9de8a8942, type: 3}
       propertyPath: m_Name
       value: water

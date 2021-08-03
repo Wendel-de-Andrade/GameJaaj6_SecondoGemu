@@ -8,7 +8,8 @@ public class mechanics : MonoBehaviour
     [SerializeField] ParticleSystem rain = null;
     public ParticleSystem trigger = null;
     public GameObject triggerObj;
-    public bool acionado = false;
+    private bool acionado = false;
+    static bool espera = false;
     private bool hover;
     public static mechanics instance;
     private water agua;
@@ -24,16 +25,24 @@ public class mechanics : MonoBehaviour
     }
     void Update()
     {
-        if (Input.GetMouseButtonDown(0) && acionado == false && hover == true && agua.winter == false)
+        if (Input.GetMouseButtonDown(0) && acionado == false && hover == true && agua.winter == false && espera == false)
         {
             Raining();
             acionado = true;
+            StartCoroutine(acionamentoGlobal(0.88f));
         }
         if (agua.summer == true)
         {
             triggerObj.SetActive(true);
             acionado = false;
         }
+    }
+
+    IEnumerator acionamentoGlobal(float time)
+    {
+        espera = true;
+        yield return new WaitForSeconds(time);
+        espera = false;
     }
 
     //Metódo para chamar a chuva

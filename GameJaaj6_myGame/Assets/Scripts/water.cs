@@ -7,10 +7,10 @@ public class water : MonoBehaviour
 {
     public float high;
     public static water instance;
-    private Vector3 endScale;
     private SpriteRenderer waterSprite;
     private int qtdAcion = 0;
     private bool reduce = false;
+    public AnimationCurve curve;
     //Estações
     public bool winter = false;
     public bool summer = false;
@@ -27,10 +27,8 @@ public class water : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        //freeze = false;
         render = GetComponent<Renderer>();
         instance = this;
-        endScale = new Vector3(transform.localScale.x, transform.localScale.y + high, 1);
         waterSprite = GetComponent<SpriteRenderer>();
         waterSprite.material.color = myColorPrimary;
     }
@@ -59,7 +57,7 @@ public class water : MonoBehaviour
             freeze = false;
             if (reduce == true)
             {
-                transform.localScale = new Vector3(transform.localScale.x, transform.localScale.y - (high * qtdAcion), 1);
+                StartCoroutine(ScaleSummerAnimation(1.0f));
                 reduce = false;
                 qtdAcion = 0;
             }
@@ -83,7 +81,42 @@ public class water : MonoBehaviour
             freeze = false;
         }
     }
-    
+
+    IEnumerator ScaleAnimation(float time)
+    {
+        float i = 0;
+        float rate = 1 / time;
+
+        Vector3 fromScale = transform.localScale;
+        Vector3 toScale = new Vector3(transform.localScale.x, transform.localScale.y + high, 1);
+        {
+            while (i < 1)
+            {
+                i += Time.deltaTime * rate;
+                transform.localScale = Vector3.Lerp(fromScale, toScale, curve.Evaluate(i));
+                yield return 0;
+            }
+        }
+    }
+
+    IEnumerator ScaleSummerAnimation(float time)
+    {
+        float i = 0;
+        float rate = 1 / time;
+
+        Vector3 fromScale = transform.localScale;
+        Vector3 toScale2 = new Vector3(transform.localScale.x, transform.localScale.y - (high * qtdAcion), 1);
+        {
+            while (i < 1)
+            {
+                i += Time.deltaTime * rate;
+                transform.localScale = Vector3.Lerp(fromScale, toScale2, curve.Evaluate(i));
+                yield return 0;
+                Debug.Log("ACESSOU_Summer");
+            }
+        }
+    }
+
     private void acionTrigger()
     {
         if (summer == true)
@@ -92,18 +125,10 @@ public class water : MonoBehaviour
         }
         else
         {
-            transform.localScale = new Vector3(transform.localScale.x, transform.localScale.y + high, 1);
+            StartCoroutine(ScaleAnimation(1.0f));
             reduce = true;
             qtdAcion = ++qtdAcion;
         }
-
-
-        //tempoCorrido += Time.deltaTime;
-        //float percentageComplete = tempoCorrido / duracao;
-
-        //transform.localScale = Vector3.Lerp(startScale, endScale, percentageComplete);
-        //transform.localScale = Vector3.Lerp(transform.localScale, endScale, Time.deltaTime);
-        //transform.localScale = Vector3.Lerp(startScale, endScale,Mathf.SmoothStep(0, 1, percentageComplete));
     }
     public void OnParticleCollision(GameObject other)
     {
@@ -113,8 +138,7 @@ public class water : MonoBehaviour
     {
         if (collisionInfo.gameObject.tag == "Player" && !freeze)
         {
-            Destroy(GameObject.FindGameObjectWithTag("Player"));
-            Debug.Log("Destroy");
+            Destroy(GameObject.FindGameObjectWithTag("Player"), 0.0025f);
         }
     }
 }
