@@ -8,14 +8,14 @@ public class water : MonoBehaviour
     public float high;
     public static water instance;
     private Vector3 endScale;
-    private Vector3 startScale;
-    private GameObject waterObj;
     private SpriteRenderer waterSprite;
-    public int qtdAcion = 0;
+    private int qtdAcion = 0;
     private bool reduce = false;
     //Estações
     public bool winter = false;
     public bool summer = false;
+    public bool spring = false;
+    public bool autumn = false;
     //Definido cores
     Renderer render;
     [SerializeField] [Range(0f, 1f)] float LerpTime;
@@ -27,10 +27,10 @@ public class water : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        //freeze = false;
         render = GetComponent<Renderer>();
         instance = this;
         endScale = new Vector3(transform.localScale.x, transform.localScale.y + high, 1);
-        startScale = transform.localScale;
         waterSprite = GetComponent<SpriteRenderer>();
         waterSprite.material.color = myColorPrimary;
     }
@@ -38,6 +38,8 @@ public class water : MonoBehaviour
     {
         winterSeason();
         summerSeason();
+        springSeason();
+        autumnSeason();
     }
 
     private void winterSeason()
@@ -57,12 +59,31 @@ public class water : MonoBehaviour
             freeze = false;
             if (reduce == true)
             {
-                transform.localScale = new Vector3(transform.localScale.x, (high*qtdAcion)-transform.localScale.y, 1);
+                transform.localScale = new Vector3(transform.localScale.x, transform.localScale.y - (high * qtdAcion), 1);
                 reduce = false;
                 qtdAcion = 0;
             }
         }
     }
+
+    private void springSeason()
+    {
+        if (spring == true)
+        {
+            render.material.color = Color.Lerp(render.material.color, myColorPrimary, LerpTime);
+            freeze = false;
+        }
+    }
+
+    private void autumnSeason()
+    {
+        if (autumn == true)
+        {
+            render.material.color = Color.Lerp(render.material.color, myColorPrimary, LerpTime);
+            freeze = false;
+        }
+    }
+    
     private void acionTrigger()
     {
         if (summer == true)
@@ -73,6 +94,7 @@ public class water : MonoBehaviour
         {
             transform.localScale = new Vector3(transform.localScale.x, transform.localScale.y + high, 1);
             reduce = true;
+            qtdAcion = ++qtdAcion;
         }
 
 
@@ -86,13 +108,13 @@ public class water : MonoBehaviour
     public void OnParticleCollision(GameObject other)
     {
         acionTrigger();
-        qtdAcion = ++qtdAcion;
     }
     void OnCollisionEnter2D(Collision2D collisionInfo)
     {
         if (collisionInfo.gameObject.tag == "Player" && !freeze)
         {
             Destroy(GameObject.FindGameObjectWithTag("Player"));
+            Debug.Log("Destroy");
         }
     }
 }

@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 8342552475719736668}
   - component: {fileID: 8342552475719736667}
   - component: {fileID: 8342552475719736670}
-  - component: {fileID: 8342552475719736671}
+  - component: {fileID: 354498388}
   m_Layer: 4
   m_Name: water
   m_TagString: Agua
@@ -75,7 +75,7 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 1
   m_Sprite: {fileID: 7482667652216324306, guid: 48e93eef0688c4a259cb0eddcd8661f7, type: 3}
-  m_Color: {r: 0, g: 0.3347354, b: 1, a: 1}
+  m_Color: {r: 0.21226418, g: 0.9334738, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -132,7 +132,7 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 1, y: 1}
   m_EdgeRadius: 0
---- !u!114 &8342552475719736671
+--- !u!114 &354498388
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -146,6 +146,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   high: 2.3
   winter: 1
-  LerpTime: 0.05
-  myColor: {r: 0, g: 0.2465775, b: 1, a: 0.4627451}
+  summer: 0
+  spring: 0
+  autumn: 0
+  LerpTime: 0.009
+  myColorPrimary: {r: 0.29803923, g: 0.43529415, b: 1, a: 1}
+  myColorSecondary: {r: 0.5613208, g: 0.82631445, b: 1, a: 0.44705883}
   freeze: 1

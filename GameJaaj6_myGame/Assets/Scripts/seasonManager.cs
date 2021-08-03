@@ -21,6 +21,9 @@ public class seasonManager : MonoBehaviour
     {
         winter();
         summer();
+        spring();
+        autumn();
+        //Debug.Log(currentSeason);
     }
 
     public void winter()
@@ -48,6 +51,32 @@ public class seasonManager : MonoBehaviour
          if (currentSeason != Season.SUMMER)
         {
             agua.summer = false;
+        }
+    }
+
+    public void spring()
+    {
+        if (currentSeason == Season.SPRING)
+        {
+            agua.spring = true;
+        }
+
+         if (currentSeason != Season.SPRING)
+        {
+            agua.spring = false;
+        }
+    }
+
+    public void autumn()
+    {
+        if (currentSeason == Season.AUTUMN)
+        {
+            agua.autumn = true;
+        }
+
+         if (currentSeason != Season.AUTUMN)
+        {
+            agua.autumn = false;
         }
     }
 }
