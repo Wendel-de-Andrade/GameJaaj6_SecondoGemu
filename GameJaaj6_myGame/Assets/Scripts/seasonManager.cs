@@ -11,11 +11,13 @@ public class seasonManager : MonoBehaviour
     //Inverno
     [SerializeField] ParticleSystem neve = null;
     private water agua;
+    public static seasonManager instance;
 
     void Start()
     {
         GameObject a = GameObject.FindGameObjectWithTag("Agua");
         agua = a.GetComponent<water>();
+        instance = this;
     }
     void Update()
     {
