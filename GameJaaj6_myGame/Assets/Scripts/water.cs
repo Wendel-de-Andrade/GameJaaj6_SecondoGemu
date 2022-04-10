@@ -112,7 +112,6 @@ public class water : MonoBehaviour
                 i += Time.deltaTime * rate;
                 transform.localScale = Vector3.Lerp(fromScale, toScale2, curve.Evaluate(i));
                 yield return 0;
-                Debug.Log("ACESSOU_Summer");
             }
         }
     }
